@@ -1,0 +1,2118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Betwn Copy Deck</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a working review sheet. Sticky page index on the left, one block per site page on the right,
+   copy set in tables the way it will be pasted into Framer. Placeholders glow like a highlighter. */
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --ink: #15171c;
+  --muted: #5b6270;
+  --line: #e1e4ea;
+  --accent: #e2531c;
+  --accent-soft: #fdebe3;
+  --fill-bg: #ffeeb0;
+  --fill-ink: #5e4300;
+  --font-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Geist", "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101216; --surface: #171a20; --ink: #e8eaee; --muted: #9ba2ad; --line: #2a2f38;
+    --accent: #ff7a46; --accent-soft: #3a2117; --fill-bg: #4a3a0c; --fill-ink: #ffe28c; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101216; --surface: #171a20; --ink: #e8eaee; --muted: #9ba2ad; --line: #2a2f38;
+  --accent: #ff7a46; --accent-soft: #3a2117; --fill-bg: #4a3a0c; --fill-ink: #ffe28c; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 24px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  background: var(--bg); color: var(--ink);
+  font: 15px/1.6 var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+.wrap { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 232px minmax(0, 1fr); gap: 40px; align-items: start; }
+
+/* Index */
+.side { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); display: grid; gap: 20px; }
+.brand { display: grid; gap: 4px; }
+.brand .mark { font: 700 13px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.brand h2 { margin: 0; font: 700 26px/1.1 var(--font-display); letter-spacing: -0.01em; text-wrap: balance; }
+nav { display: grid; gap: 2px; }
+nav a {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  padding: 7px 10px; border-radius: 6px; color: var(--ink); text-decoration: none; font-weight: 500;
+}
+nav a.sub { padding-left: 24px; font-weight: 400; color: var(--muted); }
+nav a:hover, nav a:focus-visible { background: var(--surface); outline: none; box-shadow: inset 0 0 0 1px var(--line); }
+nav a.on { background: var(--accent-soft); color: var(--ink); }
+.cnt { font: 500 11px/1 var(--font-mono); padding: 4px 6px; border-radius: 99px; background: var(--fill-bg); color: var(--fill-ink); font-variant-numeric: tabular-nums; }
+.cnt.done { background: transparent; color: var(--muted); }
+.key { font-size: 13px; color: var(--muted); line-height: 1.5; border-top: 1px solid var(--line); padding-top: 16px; display: grid; gap: 8px; }
+.key p { margin: 0; }
+
+/* Intro */
+.intro { padding-bottom: 8px; display: grid; gap: 10px; max-width: 68ch; }
+.intro .eyebrow { margin: 0; font: 500 12px/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.intro h1 { margin: 0; font: 700 clamp(30px, 4vw, 44px)/1.05 var(--font-display); letter-spacing: -0.02em; text-wrap: balance; }
+.intro p { margin: 0; color: var(--muted); }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 13px; color: var(--muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+/* Pages */
+main { display: grid; gap: 28px; min-width: 0; }
+.page { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 28px clamp(18px, 3vw, 36px) 32px; min-width: 0; }
+.ph { display: grid; gap: 4px; padding-bottom: 18px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+.ph .kind { margin: 0; font: 500 11px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+.ph h1 { margin: 0; font: 700 30px/1.15 var(--font-display); letter-spacing: -0.015em; }
+.ph .url { margin: 0; font-size: 13px; color: var(--muted); }
+.ph code { font: 13px var(--font-mono); }
+.fills { color: var(--fill-ink); background: var(--fill-bg); padding: 1px 6px; border-radius: 4px; }
+
+.prose { min-width: 0; }
+.prose > * { max-width: 72ch; }
+.prose > .tw { max-width: none; }
+h2.sec { font: 600 13px/1.3 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 30px 0 10px; }
+.prose p { margin: 10px 0; }
+.prose p.note { color: var(--muted); font-size: 14px; margin-top: 14px; }
+.prose ol, .prose ul { padding-left: 22px; margin: 10px 0; display: grid; gap: 6px; }
+.prose blockquote { margin: 12px 0; padding: 4px 0 4px 16px; border-left: 3px solid var(--accent); }
+.prose blockquote p { margin: 4px 0; }
+.prose blockquote p:first-child { font: 500 19px/1.4 var(--font-display); }
+.prose strong { font-weight: 600; }
+
+.tw { overflow-x: auto; margin: 10px 0 14px; border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+th { font: 500 11.5px/1.3 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; color: var(--muted); background: var(--bg); white-space: nowrap; }
+td:first-child { color: var(--muted); font-size: 13.5px; min-width: 120px; }
+td { font-variant-numeric: tabular-nums; }
+
+mark.fill { background: var(--fill-bg); color: var(--fill-ink); padding: 0 3px; border-radius: 3px; font-weight: 500; }
+li.todo { list-style: none; margin-left: -22px; display: flex; gap: 10px; align-items: baseline; }
+.box { flex: none; width: 13px; height: 13px; border: 1.5px solid var(--muted); border-radius: 3px; transform: translateY(2px); }
+
+@media (max-width: 860px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .side { position: static; }
+  nav { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 4px; }
+  nav a.sub { padding-left: 10px; }
+  .key { display: none; }
+}
+</style>
+
+<div class="wrap">
+  <aside class="side">
+    <div class="brand"><span class="mark">Betwn Studios</span><h2>Website copy, for review</h2></div>
+    <nav aria-label="Pages"><a href="#home"><span>Home</span><span class="cnt" title="Facts to fill">23</span></a>
+<a href="#work"><span>Work</span><span class="cnt" title="Facts to fill">1</span></a>
+<a class="sub" href="#cs-sourcify"><span>Sourcify AI</span><span class="cnt" title="Facts to fill">4</span></a>
+<a class="sub" href="#cs-economize"><span>Economize</span><span class="cnt" title="Facts to fill">11</span></a>
+<a class="sub" href="#cs-marketlens"><span>The Market Lens</span><span class="cnt" title="Facts to fill">4</span></a>
+<a class="sub" href="#cs-yunilabs"><span>Yunilabs</span><span class="cnt" title="Facts to fill">3</span></a>
+<a href="#pricing"><span>Pricing</span><span class="cnt" title="Facts to fill">19</span></a>
+<a href="#book"><span>Book a call</span><span class="cnt" title="Facts to fill">8</span></a>
+<a href="#global"><span>Nav, footer and SEO</span><span class="cnt" title="Facts to fill">6</span></a></nav>
+    <div class="key">
+      <p><mark class="fill">[Highlighted]</mark> = a fact we still need from the founders or a client. The number beside each page counts them.</p>
+      <p>Prices are suggested starting points and may change.</p>
+    </div>
+  </aside>
+  <main>
+    <div class="intro">
+      <p class="eyebrow">Copy deck · 2 Nov 2026</p>
+      <h1>Every word on the new site, page by page.</h1>
+      <p>Designers: each table row is one element on the page, in the order it appears. Content reviewers: check the copy column, and flag anything that reads wrong or overpromises. 79 highlighted facts are still open across the site.</p>
+      <div class="legend"><span><mark class="fill">[N] pages</mark> fill in before launch</span><span><span class="box" aria-hidden="true"></span> to collect from the client</span></div>
+    </div>
+    <section class="page" id="home" aria-labelledby="home-t">
+  <header class="ph">
+    <p class="kind">Page</p>
+    <h1 id="home-t">Home</h1>
+    <p class="url"><code>/</code> · <span class="fills">23 to fill</span></p>
+  </header>
+  <div class="prose"><h2 class="sec">1. Hero</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Badge</td>
+<td>• Available for Q1 2027 / GROWTH DESIGN AGENCY (same structure as today: orange dot, status, slash, mono label)</td>
+</tr>
+<tr>
+<td>H1</td>
+<td>The design partner your in-house team wishes it had.</td>
+</tr>
+<tr>
+<td>Subhead</td>
+<td>We design and ship marketing sites, product UI and brand systems for mid-market teams, enterprise product groups and repeat founders. Two founders do the work, from the first call to the last fix.</td>
+</tr>
+<tr>
+<td>Primary button</td>
+<td>Book a quick call</td>
+</tr>
+<tr>
+<td>Secondary button</td>
+<td>See case studies</td>
+</tr>
+<tr>
+<td>Proof row</td>
+<td>Official Framer Expert · 5.0 on Clutch from <mark class="fill">[13]</mark> reviews · <mark class="fill">[N]</mark> projects shipped since <mark class="fill">[year]</mark></td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">2. Logo carousel</h2>
+<p>Layout: one row of customer logos scrolling slowly in a loop. The carousel pauses on hover. Hovering a logo that has a case study shows a "View case study →" pill over it; clicking goes to that case study. Logos without a case study don't react and aren't clickable. On mobile (no hover), linked logos show a small "Case study" tag under them and the whole logo is tappable. Keyboard users can tab to linked logos, and the pill shows on focus.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Label (mono)</td>
+<td>TRUSTED BY TEAMS AT</td>
+</tr>
+<tr>
+<td>Hover pill</td>
+<td>View case study →</td>
+</tr>
+<tr>
+<td>Mobile tag</td>
+<td>Case study</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Logo</th>
+<th>Links to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sourcify</td>
+<td>/work/sourcify</td>
+</tr>
+<tr>
+<td>Economize</td>
+<td>/work/economize</td>
+</tr>
+<tr>
+<td>The Market Lens</td>
+<td>/work/the-market-lens</td>
+</tr>
+<tr>
+<td>Yunilabs</td>
+<td>/work/yunilabs</td>
+</tr>
+<tr>
+<td>SiftHub · Molto · River · Tessa · DemandExperts · Infinify · Steadwing · Iverson</td>
+<td>No link until each has a case study</td>
+</tr>
+</tbody>
+</table></div>
+<p>Note: Economize and Yunilabs logos are missing from the current logo set. <mark class="fill">[Confirm the Lens logo is The Market Lens.]</mark> Only show logos you have permission to use.</p>
+<h2 class="sec">3. Why teams switch</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>Why teams switch</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>Agency-grade work, with the people who do it on the call.</td>
+</tr>
+<tr>
+<td>Subhead</td>
+<td>Large teams don't need another vendor to manage. Here's what changes when you work with us.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Card (top row)</th>
+<th>Card below it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Your brief goes to a junior team.</strong> The senior people pitch the work, and someone else delivers it.</td>
+<td><strong>The founders do every hour.</strong> The people on your intro call are the people designing your pages.</td>
+</tr>
+<tr>
+<td><strong>Approval layers slow every page.</strong> Feedback passes through an account manager before it reaches a designer.</td>
+<td><strong>Decisions happen in a day.</strong> You get a daily Loom and a shared Slack channel, with no one in between.</td>
+</tr>
+<tr>
+<td><strong>Design and build sit with different vendors.</strong> Every handoff loses detail and adds a round of fixes.</td>
+<td><strong>One team designs and builds.</strong> What you approve in Figma is what goes live in Framer.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">4. Founders</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Reveal line</td>
+<td>Every project is run by its founders, from the first sketch to the last fix.</td>
+</tr>
+<tr>
+<td>Card 1</td>
+<td>Piyush <mark class="fill">[surname]</mark> · Co-founder, <mark class="fill">[design and strategy]</mark> · <mark class="fill">[N]</mark> years designing for <mark class="fill">[SaaS and AI]</mark> · LinkedIn</td>
+</tr>
+<tr>
+<td>Card 2</td>
+<td>Swaraj Gogoi · Co-founder, <mark class="fill">[design and build]</mark> · <mark class="fill">[N]</mark> years designing for <mark class="fill">[SaaS and AI]</mark> · LinkedIn</td>
+</tr>
+<tr>
+<td>Small line</td>
+<td>When a scope needs more hands, we bring in specialists we've worked with before and name them in the proposal.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">5. Case studies</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>Selected work</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>Work that moved a number.</td>
+</tr>
+<tr>
+<td>Cards</td>
+<td>Sourcify AI · Economize · The Market Lens (card lines are in each case study below)</td>
+</tr>
+<tr>
+<td>Card link</td>
+<td>Read case study</td>
+</tr>
+<tr>
+<td>Section button</td>
+<td>See all work</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">6. Services</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>What we do</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>One team for the site, the product and the brand.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Description</th>
+<th>Tags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Websites</td>
+<td>Strategy, design and a Framer or Webflow build, with a component library your team can extend.</td>
+<td>Marketing sites · Landing pages · CMS</td>
+</tr>
+<tr>
+<td>Product design</td>
+<td>Dashboards, onboarding and design systems, handed off ready for your engineers.</td>
+<td>Web apps · Dashboards · Design systems</td>
+</tr>
+<tr>
+<td>Motion</td>
+<td>Product explainers, launch films and UI animation that make complex products easy to follow.</td>
+<td>Explainers · Lottie · Rive</td>
+</tr>
+<tr>
+<td>Pitch deck &amp; Collaterals</td>
+<td>Custom product illustration and pitch or sales decks in your brand.</td>
+<td>Feature visuals · Spot illustrations · Decks</td>
+</tr>
+</tbody>
+</table></div>
+<p>Section button: See pricing</p>
+<h2 class="sec">7. Comparison (launch: 3-column table)</h2>
+<p>Layout: light grey section. Betwn column is a white rounded card with the logo; bold row labels on the left; centred cell text; hairline rows. The interactive "by the numbers" version is parked for after launch.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Badge</td>
+<td>• Why teams switch / COMPARISON</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>Senior capacity, without adding headcount.</td>
+</tr>
+<tr>
+<td>Button</td>
+<td>Book a quick call</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Row</th>
+<th>Betwn</th>
+<th>In-house hire</th>
+<th>Freelancers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Time to start</td>
+<td>The day after signing</td>
+<td>2–4 months to hire and onboard</td>
+<td>Weeks to find the right fit</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Fixed price per scope, agreed up front</td>
+<td>$150k+ a year, plus benefits and tools</td>
+<td>Lower rates, higher rework</td>
+</tr>
+<tr>
+<td>Seniority</td>
+<td>Founders on every project</td>
+<td>One senior, one skill set</td>
+<td>Varies from one hire to the next</td>
+</tr>
+<tr>
+<td>Coverage</td>
+<td>Web, product, motion and pitch decks under one contract</td>
+<td>Each new skill is another hire</td>
+<td>One specialist per contract</td>
+</tr>
+<tr>
+<td>Design to live site</td>
+<td>One team designs and builds in Framer or Webflow</td>
+<td>Needs a developer alongside</td>
+<td>Hand-offs between separate contractors</td>
+</tr>
+<tr>
+<td>Visibility</td>
+<td>Shared Slack, daily Loom, weekly review</td>
+<td>Managed by your team</td>
+<td>Updates when they're free</td>
+</tr>
+<tr>
+<td>Vendor setup</td>
+<td>One NDA, one signed scope, one invoice</td>
+<td>Recruiting, payroll and equipment</td>
+<td>A contract and invoice per person</td>
+</tr>
+<tr>
+<td>Commitment</td>
+<td>One project, or month to month</td>
+<td>Permanent headcount</td>
+<td>Availability not guaranteed</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">8. Process</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>How it works</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>From first call to launch, with no surprises.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Title</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01</td>
+<td>Intro call</td>
+<td>30 minutes on your goals, constraints and deadline. You get a written scope and price within <mark class="fill">[48 hours]</mark>.</td>
+</tr>
+<tr>
+<td>02</td>
+<td>Direction</td>
+<td>We audit what you have, set the page structure and agree on one visual direction before designing pages.</td>
+</tr>
+<tr>
+<td>03</td>
+<td>Design and build</td>
+<td>Daily Loom updates, a weekly review call and a shared Slack channel. The Figma file and staging link are always live.</td>
+</tr>
+<tr>
+<td>04</td>
+<td>Handoff</td>
+<td>A training session, documented components and <mark class="fill">[30 days]</mark> of fixes after launch.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">9. Testimonials</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H2</td>
+<td>What clients say.</td>
+</tr>
+<tr>
+<td>Each card</td>
+<td>"<mark class="fill">[Quote]</mark>" — <mark class="fill">[Full name]</mark>, <mark class="fill">[Title]</mark>, <mark class="fill">[Company]</mark> · <mark class="fill">[Outcome, e.g. Launched in 5 weeks]</mark></td>
+</tr>
+<tr>
+<td>Link</td>
+<td>Read all reviews on Clutch</td>
+</tr>
+</tbody>
+</table></div>
+<p>Stats row: <mark class="fill">[N]</mark> projects shipped · 5.0 on Clutch from <mark class="fill">[13]</mark> reviews · <mark class="fill">[N]</mark> weeks average to launch</p>
+<h2 class="sec">10. FAQs</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H2</td>
+<td>Questions teams ask before they sign.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>How do you handle NDAs, contracts and vendor onboarding?</td>
+<td>We sign your NDA before kickoff, or send ours. We invoice against a signed scope and fill in your vendor and security forms.</td>
+</tr>
+<tr>
+<td>Who owns the designs and code?</td>
+<td>You do. Files, components and code transfer to you on final payment, and we can work in your own accounts from day one.</td>
+</tr>
+<tr>
+<td>You're two people. What if our scope grows?</td>
+<td>We scope honestly on the intro call. For larger work we bring in specialists we've worked with before and name them in the proposal, so there are no surprises.</td>
+</tr>
+<tr>
+<td>Can you work inside our existing design system?</td>
+<td>Yes. We extend your components and tokens rather than replacing them, and document anything new we add.</td>
+</tr>
+<tr>
+<td>How do you price?</td>
+<td>Websites are priced by page count, with build as an option. Product design runs on a monthly retainer. Motion and pitch deck &amp; collaterals are priced per package. See the pricing page for numbers.</td>
+</tr>
+<tr>
+<td>How soon can you start?</td>
+<td>The day after the scope is signed. We take on <mark class="fill">[2]</mark> new engagements a quarter.</td>
+</tr>
+<tr>
+<td>What happens after launch?</td>
+<td><mark class="fill">[30 days]</mark> of fixes are included. After that, you can move to a monthly retainer or book work as needed.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">11. Final CTA with logo wall (before the footer)</h2>
+<p>Layout: keep the current section. Badge, H2 and button on top; mono label on the right above the logo grid; 2 rows × 5 logo tiles. The logos here are static (no hover) because the carousel at the top already links to the case studies.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Badge</td>
+<td>• Available for Q1 2027</td>
+</tr>
+<tr>
+<td>H2 (pick one)</td>
+<td><strong>A. You're in good company.</strong> · B. The teams below shipped with us. Your launch is next. · C. Your next launch, designed by the founders.</td>
+</tr>
+<tr>
+<td>Body (one line, optional)</td>
+<td>Book a quick call with a founder and leave with a scope, timeline and price range.</td>
+</tr>
+<tr>
+<td>Button</td>
+<td>Book a quick call (replaces "Let's chat?")</td>
+</tr>
+<tr>
+<td>Label above logos (mono)</td>
+<td>TRUSTED BY TEAMS AT</td>
+</tr>
+</tbody>
+</table></div>
+<p>Recommendation: A. It's short, it points straight at the logos below it, and it reads as confident without the "traditional agencies" framing we dropped elsewhere. The current label "Industry leaders trusts our work" has a grammar slip (trusts → trust), and the new label fixes that.</p></div>
+</section>
+<section class="page" id="work" aria-labelledby="work-t">
+  <header class="ph">
+    <p class="kind">Page</p>
+    <h1 id="work-t">Work</h1>
+    <p class="url"><code>/work</code> · <span class="fills">1 to fill</span></p>
+  </header>
+  <div class="prose"><h2 class="sec">1. Header</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>Selected work</td>
+</tr>
+<tr>
+<td>H1</td>
+<td>Websites, product UI and brand systems that shipped.</td>
+</tr>
+<tr>
+<td>Subhead</td>
+<td>A selection of recent projects for SaaS, AI and fintech teams. Each one links to the full story: the brief, what we did and what changed.</td>
+</tr>
+<tr>
+<td>Button</td>
+<td>Book a quick call</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">2. Filters</h2>
+<p>All · Websites · Product design · Motion · Pitch deck &amp; Collaterals</p>
+<p>Show a filter only when at least two projects sit under it.</p>
+<h2 class="sec">3. Project cards</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Order</th>
+<th>Card copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Sourcify AI</strong> — A ground-up V2 platform and marketing site, designed over six months. Product design · Web design · SaaS</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>Economize</strong> — A new website for a cloud cost platform, shipped on every deadline and beyond the original scope. Web design · Illustration · B2B SaaS</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>The Market Lens</strong> — A members-only learning platform with sign-in, onboarding and a CMS, from wireframes to launch. UX · Web design · Framer</td>
+</tr>
+<tr>
+<td>4</td>
+<td><strong>Yunilabs</strong> — Ten funnel landing pages that converted better than the pages they replaced. Web design · Framer · Performance marketing</td>
+</tr>
+</tbody>
+</table></div>
+<p>Each card: a 4:3 crop of the real work, client name, outcome line, three tags. The whole card links to the case study.</p>
+<h2 class="sec">4. Bottom CTA</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H2</td>
+<td>Planning something similar?</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>Tell us what you're shipping. We'll come back with a scope and price range within <mark class="fill">[48 hours]</mark>.</td>
+</tr>
+<tr>
+<td>Button</td>
+<td>Book a quick call</td>
+</tr>
+</tbody>
+</table></div></div>
+</section>
+<section class="page" id="cs-sourcify" aria-labelledby="cs-sourcify-t">
+  <header class="ph">
+    <p class="kind">Case study</p>
+    <h1 id="cs-sourcify-t">Sourcify AI</h1>
+    <p class="url"><code>/work/sourcify</code> · <span class="fills">4 to fill</span></p>
+  </header>
+  <div class="prose"><p class="note">Source: Sourcify AI co-founder's Clutch review, Dec 2025.</p>
+<h2 class="sec">Header</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>Case study · Influencer marketing analytics</td>
+</tr>
+<tr>
+<td>H1</td>
+<td>Rebuilding Sourcify's product and website from the ground up.</td>
+</tr>
+<tr>
+<td>Intro</td>
+<td>Sourcify AI tracks and monitors brand spend across the influencer market. Over six months we redesigned its V2 platform end to end, rebuilt the marketing site, and designed the assets for launch.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">Snapshot</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Industry</th>
+<th>Stage</th>
+<th>Services</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sourcify AI, Inc.</td>
+<td>Influencer marketing analytics</td>
+<td><mark class="fill">[Stage or size]</mark></td>
+<td>Product design, web design, marketing assets</td>
+<td>July – Dec 2025</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">Metric strip</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Number</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6 months</td>
+<td>Design partnership</td>
+</tr>
+<tr>
+<td><mark class="fill">[N]</mark> screens</td>
+<td>Redesigned for V2, from sign-in to every feature</td>
+</tr>
+<tr>
+<td>5 pages</td>
+<td>Marketing site: a new homepage and 4 new pages</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">The challenge</h2>
+<ol>
+<li><strong>The product had outgrown its first version.</strong> V2 had to rebuild every flow, from sign-in through each feature, and bring in what users had been asking for.</li>
+<li><strong>The website had to keep up.</strong> The homepage needed a redesign, and four new pages had to explain what the new platform could do.</li>
+<li><strong>One look across every channel.</strong> The product, the site, LinkedIn and YouTube all needed to feel like the same company.</li>
+</ol>
+<h2 class="sec">What we did</h2>
+<p><strong>The V2 platform.</strong> We redesigned the product from the ground up, starting with authentication and working through every feature. [Name two or three key screens, for example the spend dashboard and creator tracking, and one design decision you made for each.]</p>
+<p><strong>The marketing site.</strong> We redesigned the homepage and designed four new pages around the V2 story. <mark class="fill">[Name the four pages.]</mark></p>
+<p><strong>Launch assets.</strong> We designed LinkedIn posts and banners and YouTube thumbnails in the same system, so the launch looked consistent wherever people found it.</p>
+<h2 class="sec">Results</h2>
+<p>Sourcify launched V2 with a product that, in its co-founder's words, now looks amazing and has every feature users requested, alongside a marketing site to match. [Add one number if Sourcify will share it: active users, demo requests, or time to first report.]</p>
+<h2 class="sec">Testimonial</h2>
+<blockquote>
+<p>"The quality of the designs, some of the best I've seen in the market."</p>
+<p><mark class="fill">[Full name]</mark>, Co-founder, Sourcify AI</p>
+</blockquote>
+<h2 class="sec">Images to prepare</h2>
+<ul>
+<li>Hero: the V2 dashboard, full width</li>
+<li>4–6 product screens, including sign-in and one feature in depth</li>
+<li>The new homepage, full length</li>
+<li>2 of the new marketing pages</li>
+<li>A grid of LinkedIn and YouTube assets</li>
+</ul>
+<h2 class="sec">Ask Sourcify</h2>
+<ul>
+<li class="todo"><span class="box" aria-hidden="true"></span>Permission to name them, use the logo, and quote the review</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>The co-founder's full name and a photo</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>Stage or team size</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>One number since the V2 launch</li>
+</ul></div>
+</section>
+<section class="page" id="cs-economize" aria-labelledby="cs-economize-t">
+  <header class="ph">
+    <p class="kind">Case study</p>
+    <h1 id="cs-economize-t">Economize</h1>
+    <p class="url"><code>/work/economize</code> · <span class="fills">11 to fill</span></p>
+  </header>
+  <div class="prose"><p class="note">Source: Economize CEO's Clutch review, Aug–Oct 2024 project.</p>
+<h2 class="sec">Header</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>Case study · Cloud cost optimization</td>
+</tr>
+<tr>
+<td>H1</td>
+<td>A website that makes cloud cost make sense to engineers.</td>
+</tr>
+<tr>
+<td>Intro</td>
+<td>Economize helps engineering teams analyze, manage and optimize their cloud infrastructure spend. We redesigned and rebuilt its website, with custom illustrations that turn an abstract product into something people can see.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">Snapshot</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Industry</th>
+<th>Stage</th>
+<th>Services</th>
+<th>Platform</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Economize</td>
+<td>Cloud cost optimization (B2B SaaS)</td>
+<td><mark class="fill">[Stage or size]</mark></td>
+<td>Web design, product illustration, development</td>
+<td><mark class="fill">[Framer or Webflow]</mark></td>
+<td>Aug – Oct 2024</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">Metric strip</h2>
+<p>Economize judged the project on timeline, design-to-build speed, page load time and page count. Fill in their numbers:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Number</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><mark class="fill">[N]</mark> weeks</td>
+<td>From kickoff to launch</td>
+</tr>
+<tr>
+<td><mark class="fill">[N]</mark> pages</td>
+<td>Designed and built</td>
+</tr>
+<tr>
+<td><mark class="fill">[X]</mark>s → <mark class="fill">[Y]</mark>s</td>
+<td>Page load time, before and after</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">The challenge</h2>
+<ol>
+<li><strong>A technical product for technical buyers.</strong> Engineers skim and distrust marketing. The site had to explain cost analysis clearly, without hype.</li>
+<li><strong>Cloud spend is invisible.</strong> There's nothing to photograph, so the product needed visuals that make savings and usage tangible.</li>
+<li><strong>Speed was part of the brief.</strong> Page load time was one of the measures Economize used to judge the project.</li>
+</ol>
+<h2 class="sec">What we did</h2>
+<p><strong>User-centred structure.</strong> We rebuilt the site around what engineering teams need to see first. <mark class="fill">[Name the key pages, for example Home, Product, Pricing, Integrations.]</mark></p>
+<p><strong>Product illustrations.</strong> We designed a custom illustration set in Figma that shows how Economize finds and cuts waste. <mark class="fill">[Describe the style in one sentence.]</mark></p>
+<p><strong>Development.</strong> We built the site ourselves, working in a shared Slack channel with Economize's team, and went beyond the original scope. <mark class="fill">[Name the extras you delivered.]</mark></p>
+<h2 class="sec">Results</h2>
+<p>Economize got a new website and illustration system that met every deadline without trading off quality, and included more than they first scoped. <mark class="fill">[Add the load time and timeline numbers from the metric strip.]</mark></p>
+<h2 class="sec">Testimonial</h2>
+<blockquote>
+<p>"Their dedication and attention to detail truly exceeded our expectations."</p>
+<p><mark class="fill">[Full name]</mark>, CEO, Economize</p>
+</blockquote>
+<h2 class="sec">Images to prepare</h2>
+<ul>
+<li>Hero: the new homepage above the fold</li>
+<li>3–4 illustrations from the set, shown large</li>
+<li>Two full pages</li>
+<li>A mobile view</li>
+<li>Optional: a before and after of the homepage</li>
+</ul>
+<h2 class="sec">Ask Economize</h2>
+<ul>
+<li class="todo"><span class="box" aria-hidden="true"></span>Permission to name them, use the logo, and quote the review</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>The CEO's full name and a photo</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>Load time and timeline numbers (the four measures they named)</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>Whether the illustrations can be shown in full</li>
+</ul></div>
+</section>
+<section class="page" id="cs-marketlens" aria-labelledby="cs-marketlens-t">
+  <header class="ph">
+    <p class="kind">Case study</p>
+    <h1 id="cs-marketlens-t">The Market Lens</h1>
+    <p class="url"><code>/work/the-market-lens</code> · <span class="fills">4 to fill</span></p>
+  </header>
+  <div class="prose"><p class="note">Source: The Market Lens executive's Clutch review, Sep 2025.</p>
+<h2 class="sec">Header</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>Case study · Trading education</td>
+</tr>
+<tr>
+<td>H1</td>
+<td>A private learning platform the team can run on its own.</td>
+</tr>
+<tr>
+<td>Intro</td>
+<td>The Market Lens provides trading education, resources and mentorship. They needed a custom platform where private members could reach exclusive content, built so the team can publish new material without a developer.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">Snapshot</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Industry</th>
+<th>Size</th>
+<th>Services</th>
+<th>Platform</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The Market Lens</td>
+<td>Trading education</td>
+<td>1–10 people</td>
+<td>UX, web design, development, CMS</td>
+<td>Framer</td>
+<td>Aug 2025 – ongoing</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">Metric strip</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Number</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>On time</td>
+<td>Delivered to every agreed specification</td>
+</tr>
+<tr>
+<td><mark class="fill">[N]</mark> pages</td>
+<td>Wireframed, designed and built</td>
+</tr>
+<tr>
+<td>Ongoing</td>
+<td>Partnership since August 2025</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">The challenge</h2>
+<ol>
+<li><strong>Content only members should see.</strong> The platform needed sign-in and an onboarding flow, not just a public website.</li>
+<li><strong>A team that publishes often.</strong> New lessons and resources had to go live without waiting on a developer.</li>
+<li><strong>A tight timeline, with the client hands-on.</strong> The team wanted to be involved at every step, and changes in direction had to land quickly.</li>
+</ol>
+<h2 class="sec">What we did</h2>
+<p><strong>Structure first.</strong> We wireframed the whole platform to settle the page structure and the member journey before any visual design.</p>
+<p><strong>High-fidelity design.</strong> We designed every page in Figma so the team could see and approve the final look before build.</p>
+<p><strong>Framer build.</strong> We turned the approved designs into a working Framer platform with authentication, an onboarding flow and simple navigation.</p>
+<p><strong>A CMS the team runs.</strong> We set up a CMS so The Market Lens can add new content on its own. <mark class="fill">[Name the content types, for example lessons, resources and market notes.]</mark></p>
+<h2 class="sec">Results</h2>
+<p>The platform launched on time and met every requirement: authentication, onboarding, a CMS and clear navigation, ready to take on members. The work has continued since launch. <mark class="fill">[Add a number if they'll share one: members onboarded or content published.]</mark></p>
+<h2 class="sec">Testimonial</h2>
+<blockquote>
+<p>"They respond quickly and execute to a high standard."</p>
+<p><mark class="fill">[Full name]</mark>, Executive, The Market Lens</p>
+</blockquote>
+<h2 class="sec">Images to prepare</h2>
+<ul>
+<li>Hero: the member dashboard or home</li>
+<li>A wireframe beside its finished page</li>
+<li>The onboarding flow as a strip of 3–4 screens</li>
+<li>A content page and its CMS entry side by side</li>
+<li>A mobile view</li>
+</ul>
+<h2 class="sec">Ask The Market Lens</h2>
+<ul>
+<li class="todo"><span class="box" aria-hidden="true"></span>Permission to name them, show the platform (it's members-only), and quote the review</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>The reviewer's full name and a photo, or agreement to show the title only</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>Page and template count</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>A number since launch, if they'll share one</li>
+</ul></div>
+</section>
+<section class="page" id="cs-yunilabs" aria-labelledby="cs-yunilabs-t">
+  <header class="ph">
+    <p class="kind">Case study</p>
+    <h1 id="cs-yunilabs-t">Yunilabs</h1>
+    <p class="url"><code>/work/yunilabs</code> · <span class="fills">3 to fill</span></p>
+  </header>
+  <div class="prose"><p class="note">Source: Yunilabs marketing lead's Clutch review, Dec 2025.</p>
+<h2 class="sec">Header</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>Case study · Performance marketing</td>
+</tr>
+<tr>
+<td>H1</td>
+<td>Ten landing pages that beat the ones they replaced.</td>
+</tr>
+<tr>
+<td>Intro</td>
+<td>Yunilabs runs performance marketing for businesses of every kind. They needed ten landing pages for very different funnels, designed and built fast enough to keep pace with live ad campaigns.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">Snapshot</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Client</th>
+<th>Industry</th>
+<th>Size</th>
+<th>Services</th>
+<th>Platform</th>
+<th>Timeline</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Yunilabs</td>
+<td>Performance marketing</td>
+<td><mark class="fill">[Size]</mark></td>
+<td>Web design, development</td>
+<td>Framer</td>
+<td>Oct – Nov 2025</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">Metric strip</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Number</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>Landing pages designed and built</td>
+</tr>
+<tr>
+<td>2 months</td>
+<td>From first brief to the tenth page</td>
+</tr>
+<tr>
+<td><mark class="fill">[+X%]</mark></td>
+<td>Ad conversion compared with the previous pages</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">The challenge</h2>
+<ol>
+<li><strong>Ten funnels, ten audiences.</strong> Each page served a different offer, so none could be a copy of the last.</li>
+<li><strong>Campaigns don't wait.</strong> Ads were live or about to be, so changes and fixes needed to land the same day.</li>
+<li><strong>Across time zones.</strong> The Yunilabs team worked in a different time zone, so communication had to stay quick and clear.</li>
+</ol>
+<h2 class="sec">What we did</h2>
+<p><strong>Design from the brief.</strong> Yunilabs sent a briefing per funnel, and we took over the full design of each page in Figma.</p>
+<p><strong>Built in Framer.</strong> We developed every page ourselves, so what was approved in Figma went live unchanged.</p>
+<p><strong>Same-day changes.</strong> Change requests, small errors and adjustments were fixed the day they came in, every time.</p>
+<h2 class="sec">Results</h2>
+<p>All ten pages shipped by their deadlines. Yunilabs' own client was very happy with the pages, and ad conversion improved compared with the landing pages they replaced. [Add the percentage if Yunilabs will share it; it's the strongest number you could have on the site.]</p>
+<h2 class="sec">Testimonial</h2>
+<blockquote>
+<p>"I was impressed by their fast response time and problem-solving."</p>
+<p><mark class="fill">[Full name]</mark>, Marketing, Yunilabs</p>
+</blockquote>
+<h2 class="sec">Images to prepare</h2>
+<ul>
+<li>Hero: three or four of the pages side by side</li>
+<li>A grid of all ten above the fold, showing the range</li>
+<li>Two pages full length</li>
+<li>A mobile view</li>
+</ul>
+<h2 class="sec">Ask Yunilabs</h2>
+<ul>
+<li class="todo"><span class="box" aria-hidden="true"></span>Permission to name them, show the pages (some may belong to their clients), and quote the review</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>The reviewer's full name and title</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>The conversion uplift as a percentage, even a rough one</li>
+<li class="todo"><span class="box" aria-hidden="true"></span>Whether the pages can be named by their end client</li>
+</ul></div>
+</section>
+<section class="page" id="pricing" aria-labelledby="pricing-t">
+  <header class="ph">
+    <p class="kind">Page</p>
+    <h1 id="pricing-t">Pricing</h1>
+    <p class="url"><code>/pricing</code> · <span class="fills">19 to fill</span></p>
+  </header>
+  <div class="prose"><p class="note">Layout: services listed on the left, the selected service's three plans as cards on the right (plan picker). Prices are suggested starting points; change any number before publishing.</p>
+<h2 class="sec">1. Hero</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Badge</td>
+<td>• Available for Q1 2027 / PRICING</td>
+</tr>
+<tr>
+<td>H1</td>
+<td>Your senior design team, priced up front.</td>
+</tr>
+<tr>
+<td>Subhead</td>
+<td>A one-time project or a monthly plan. Pick a service and compare its plans.</td>
+</tr>
+<tr>
+<td>Proof chips</td>
+<td>Official Framer Expert · 5.0 on Clutch · <mark class="fill">[13]</mark> reviews · USD · invoiced against a signed scope</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">2. Service list (left column)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Price shown</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Websites</td>
+<td>from $3,000</td>
+</tr>
+<tr>
+<td>Product design</td>
+<td>from $4,500</td>
+</tr>
+<tr>
+<td>Motion</td>
+<td>from $1,500</td>
+</tr>
+<tr>
+<td>Pitch deck &amp; Collaterals</td>
+<td>from $2,000</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Launch bundle card (under the list)</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tag</td>
+<td>Launch bundle · from $22,000</td>
+</tr>
+<tr>
+<td>Heading</td>
+<td>Launching soon? Get the site, the film and the deck from one team.</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>A Growth website with development, a product explainer and a pitch deck, on one timeline.</td>
+</tr>
+<tr>
+<td>Link</td>
+<td>Plan your launch →</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">3. Websites (selected by default)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>WEBSITES · ONE-TIME PROJECT</td>
+</tr>
+<tr>
+<td>Heading</td>
+<td>Websites</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Marketing sites priced by page count. Design only, or designed and built in Framer or Webflow.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Label</th>
+<th>Design only</th>
+<th>Switch: Add development</th>
+<th>With development</th>
+<th>Line</th>
+<th>Included</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Landing page</td>
+<td>1 PAGE</td>
+<td>$3,000</td>
+<td>+$1,500</td>
+<td>$4,500</td>
+<td>One focused page for a launch, a campaign or a new product.</td>
+<td>Discovery and visual direction · Responsive design for every screen · Two review rounds per phase, plus fixes</td>
+</tr>
+<tr>
+<td>Starter</td>
+<td>UP TO 5 PAGES</td>
+<td>$6,000</td>
+<td>+$3,000</td>
+<td>$9,000</td>
+<td>A focused marketing site for a new product or a rebrand.</td>
+<td>Discovery, page structure and visual direction · Responsive design for every screen · A component library your team can reuse · Two review rounds per phase, plus fixes</td>
+</tr>
+<tr>
+<td>Growth (Popular, dark card)</td>
+<td>6–12 PAGES</td>
+<td>$10,000</td>
+<td>+$5,000</td>
+<td>$15,000</td>
+<td>A full marketing site your team can keep extending.</td>
+<td>Same as Starter</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Price caption under each price: "design only" or "design + development".</li>
+<li>When development is switched on, two lines are added to Included: Framer or Webflow build with CMS setup · Launch support and <mark class="fill">[30 days]</mark> of fixes.</li>
+<li>Switch label: Add development, with Framer and Webflow icons and the extra cost.</li>
+<li>Button on every card: Book a call</li>
+</ul>
+<p><strong>Scale line (under the cards):</strong> Scale · 13+ pages — From $16,000 design only, or $24,000 with development. Scoped together on the call. Link: Scope a larger site</p>
+<p><strong>Add-ons</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Add-on</th>
+<th>Price</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CMS collection (blog, case studies, careers)</td>
+<td>+$1,000 each</td>
+</tr>
+<tr>
+<td>Interactions and motion pack</td>
+<td>+$1,500</td>
+</tr>
+<tr>
+<td>Custom illustration pack (5 pieces)</td>
+<td>+$1,500</td>
+</tr>
+<tr>
+<td>SEO and analytics setup</td>
+<td>+$800</td>
+</tr>
+<tr>
+<td>Migration from Webflow or WordPress</td>
+<td>+$2,000</td>
+</tr>
+</tbody>
+</table></div>
+<p>Small print: Extra pages are $600 each, plus $300 with development.</p>
+<h2 class="sec">4. Product design</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>PRODUCT DESIGN · SPRINT OR MONTHLY</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Start with a two-week sprint, then keep us on as part of your product team.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Label</th>
+<th>Price</th>
+<th>Caption</th>
+<th>Line</th>
+<th>Included</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Product sprint</td>
+<td>ONE-TIME · 2 WEEKS</td>
+<td>$4,500</td>
+<td>fixed price</td>
+<td>See how we work on one real problem.</td>
+<td>UX audit of your product · One key flow redesigned · Engineer-ready handoff · Counts toward your first month if you continue</td>
+</tr>
+<tr>
+<td>Product partner (Popular)</td>
+<td>MONTHLY</td>
+<td>$5,500</td>
+<td>per month</td>
+<td>Ongoing design for one stream of work.</td>
+<td>One active request at a time · Unlimited backlog · Weekly review call · Design system upkeep</td>
+</tr>
+<tr>
+<td>Embedded</td>
+<td>MONTHLY · <mark class="fill">[2]</mark> SPOTS A QUARTER</td>
+<td>$9,000</td>
+<td>per month</td>
+<td>Both founders, inside your product team.</td>
+<td>Two active requests at a time · Joins your standups or sprint reviews · Daily async updates · Design system ownership</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">5. Motion</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>MOTION · ONE-TIME PROJECT</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Animation that explains your product, from UI details to launch films.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Label</th>
+<th>Price</th>
+<th>Line</th>
+<th>Included</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UI animation set</td>
+<td>UP TO 5 ANIMATIONS</td>
+<td>from $1,500</td>
+<td>Small animations that make your product easier to follow.</td>
+<td>Up to 5 Lottie or Rive animations · For your product UI or website · Two review rounds per phase, plus fixes</td>
+</tr>
+<tr>
+<td>Product explainer</td>
+<td>30–60 SECONDS</td>
+<td>from $4,000</td>
+<td>A short video of your product in use.</td>
+<td>A 30–60 second product video · Built around your real product · Two review rounds per phase, plus fixes</td>
+</tr>
+<tr>
+<td>Launch film</td>
+<td>60–90 SECONDS</td>
+<td>from $7,000</td>
+<td>A launch video with script, design and sound.</td>
+<td>A 60–90 second launch video · Script, design and sound · Two review rounds per phase, plus fixes</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">6. Pitch deck &amp; Collaterals</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>PITCH DECK &amp; COLLATERALS · ONE-TIME PROJECT</td>
+</tr>
+<tr>
+<td>Description</td>
+<td>Visuals that make complex products easy to understand.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Plan</th>
+<th>Label</th>
+<th>Price</th>
+<th>Line</th>
+<th>Included</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Spot illustration pack</td>
+<td>8–10 ILLUSTRATIONS</td>
+<td>from $2,000</td>
+<td>Matching illustrations for your site or product.</td>
+<td>8–10 matching illustrations · Drawn in one consistent style · Two review rounds per phase, plus fixes</td>
+</tr>
+<tr>
+<td>Feature illustration set</td>
+<td>3–5 SCENES</td>
+<td>from $2,500</td>
+<td>Detailed product scenes for your feature sections.</td>
+<td>3–5 detailed product scenes · Sized for your feature sections · Two review rounds per phase, plus fixes</td>
+</tr>
+<tr>
+<td>Pitch or sales deck</td>
+<td>UP TO 15 SLIDES</td>
+<td>from $3,000</td>
+<td>A deck in your brand for the raise or the sales team.</td>
+<td>Up to 15 slides in your brand · Extra slides $150 each · Two review rounds per phase, plus fixes</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">7. How it works (under every service's plans)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Typical timeline</td>
+<td>Websites: About 2 weeks for a landing page, 3–6 weeks for a full site. · Product: 2 weeks for the sprint, then month to month. · Motion: Scoped on the call, depending on length and style. · Pitch deck &amp; Collaterals: Scoped on the call, depending on the number of pieces.</td>
+</tr>
+<tr>
+<td>The founders, on every call</td>
+<td>Piyush and Swaraj do the work. No account managers, no hand-offs to juniors.</td>
+</tr>
+<tr>
+<td>Updates as the work moves</td>
+<td>Daily Loom walkthroughs, a weekly review call and a shared Slack channel. Nothing ships until you approve it.</td>
+</tr>
+<tr>
+<td>Billing</td>
+<td>Websites: Fixed price, agreed on the call. <mark class="fill">[50%]</mark> to start, <mark class="fill">[50%]</mark> at launch. · Product: Sprint is a fixed price; monthly plans are billed in advance, pause or cancel with <mark class="fill">[30]</mark> days' notice. · Motion, pitch deck &amp; collaterals: Fixed price once scoped. <mark class="fill">[50%]</mark> to start, <mark class="fill">[50%]</mark> at delivery.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">8. Proof</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>PROOF</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>What teams got for the money.</td>
+</tr>
+<tr>
+<td>Stats</td>
+<td>5.0 on Clutch, <mark class="fill">[13]</mark> reviews · <mark class="fill">[N]</mark> projects shipped · 2 founders on every project</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Quote</th>
+<th>Numbers</th>
+<th>Attribution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"The quality of the designs, some of the best I've seen in the market."</td>
+<td>6 months · Design partnership / V2 · Platform and site</td>
+<td><mark class="fill">[Full name]</mark> · Co-founder, Sourcify AI</td>
+</tr>
+<tr>
+<td>"I was impressed by their fast response time and problem-solving."</td>
+<td>10 · Landing pages built / <mark class="fill">[+X%]</mark> · Ad conversion</td>
+<td><mark class="fill">[Full name]</mark> · Marketing, Yunilabs</td>
+</tr>
+<tr>
+<td>"Their dedication and attention to detail truly exceeded our expectations."</td>
+<td><mark class="fill">[N]</mark> weeks · Kickoff to launch / 0 · Missed deadlines</td>
+<td><mark class="fill">[Full name]</mark> · CEO, Economize</td>
+</tr>
+</tbody>
+</table></div>
+<p>Link: Read all reviews on Clutch</p>
+<h2 class="sec">9. For larger teams</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>FOR LARGER TEAMS</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>Ready for procurement, legal and security reviews.</td>
+</tr>
+<tr>
+<td>Subhead</td>
+<td>What bigger teams ask before they sign, answered up front.</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Card</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NDA before kickoff</td>
+<td>Use your agreement or ours, signed before we see anything private.</td>
+</tr>
+<tr>
+<td>Invoicing against a signed scope</td>
+<td>Projects: <mark class="fill">[50%]</mark> to start, <mark class="fill">[50%]</mark> at launch. Monthly plans: billed in advance. We'll fill in your vendor forms.</td>
+</tr>
+<tr>
+<td>Your accounts, your IP</td>
+<td>We work in your Figma, Framer and repo. Every file transfers to you on final payment.</td>
+</tr>
+<tr>
+<td>Access limited to the work</td>
+<td>Nothing goes live without your sign-off.</td>
+</tr>
+<tr>
+<td>Overlap with your day</td>
+<td>Based in India (IST), covering the European day and the US East Coast morning.</td>
+</tr>
+<tr>
+<td>Pause or cancel monthly plans</td>
+<td>With <mark class="fill">[30]</mark> days' notice. Retainer months can also go toward motion, pitch decks or collaterals.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">10. Pricing questions</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Should we pick a project or a monthly plan?</td>
+<td>A project if the work has an end date, like a new site or a deck. A monthly plan if design work keeps coming, like an evolving product.</td>
+</tr>
+<tr>
+<td>Why fixed prices instead of hourly?</td>
+<td>You know the cost before we start, and we carry the risk if it takes longer.</td>
+</tr>
+<tr>
+<td>Can we add development later?</td>
+<td>Yes. A design-only website can move to development at any point, at the difference in price.</td>
+</tr>
+<tr>
+<td>What if our project doesn't fit a plan?</td>
+<td>Book a call. We'll scope it and send a fixed price within <mark class="fill">[48 hours]</mark>.</td>
+</tr>
+<tr>
+<td>Do you offer discounts?</td>
+<td>No. The landing page and the product sprint are the low-risk ways to start.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">11. Final CTA</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H2</td>
+<td>Not sure which fits?</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>Tell us what you're shipping and we'll recommend a plan on the call.</td>
+</tr>
+<tr>
+<td>Button</td>
+<td>Book a quick call</td>
+</tr>
+</tbody>
+</table></div></div>
+</section>
+<section class="page" id="book" aria-labelledby="book-t">
+  <header class="ph">
+    <p class="kind">Page</p>
+    <h1 id="book-t">Book a call</h1>
+    <p class="url"><code>/book-a-call</code> · <span class="fills">8 to fill</span></p>
+  </header>
+  <div class="prose"><p class="note">Redirect /contact here. Left column: copy and founders. Right column: the form, then the Cal.com calendar (30-minute event).</p>
+<h2 class="sec">1. Left column</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Eyebrow</td>
+<td>• Available for Q1 2027 / BOOK A CALL</td>
+</tr>
+<tr>
+<td>H1</td>
+<td>Book a quick call</td>
+</tr>
+<tr>
+<td>Subhead</td>
+<td>Talk to a founder about what you're shipping next. You'll leave with a rough scope, timeline and price range, whether or not we work together.</td>
+</tr>
+<tr>
+<td>List heading</td>
+<td>What we'll cover</td>
+</tr>
+<tr>
+<td>Item 1</td>
+<td>Your goals, audience and deadline</td>
+</tr>
+<tr>
+<td>Item 2</td>
+<td>What you have now: site, product, design system, team</td>
+</tr>
+<tr>
+<td>Item 3</td>
+<td>Scope options and a price range</td>
+</tr>
+<tr>
+<td>Who you'll meet</td>
+<td>Piyush or Swaraj, co-founders. No sales reps.</td>
+</tr>
+<tr>
+<td>Testimonial</td>
+<td>"<mark class="fill">[Real quote]</mark>" — <mark class="fill">[Full name]</mark>, <mark class="fill">[Title]</mark>, <mark class="fill">[Company]</mark> (with that company's own logo)</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">2. Form (step 1)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Field type</th>
+<th>Placeholder or options</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Full name</td>
+<td>Text</td>
+<td>Jordan Lee</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Work email</td>
+<td>Email</td>
+<td>you@company.com</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Company website</td>
+<td>URL</td>
+<td>company.com</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Your role</td>
+<td>Text</td>
+<td>Head of Marketing</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Company size</td>
+<td>Select</td>
+<td>1–50 · 51–200 · 201–1,000 · 1,000+</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>What do you need?</td>
+<td>Checkboxes</td>
+<td>Website · Product design · Motion · Pitch deck &amp; Collaterals · Not sure yet</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Budget</td>
+<td>Select</td>
+<td>Under $5k · $5–10k · $10–25k · $25–50k · $50k+ · Not sure yet</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Timeline</td>
+<td>Select</td>
+<td>As soon as possible · 1–3 months · 3+ months</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Anything else?</td>
+<td>Long text</td>
+<td>Links to your current site, a brief, or what's not working</td>
+<td>No</td>
+</tr>
+</tbody>
+</table></div>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Button</td>
+<td>Continue to scheduling</td>
+</tr>
+<tr>
+<td>Under button</td>
+<td>Takes about a minute. We'll only use this to prepare for the call.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">3. Calendar (step 2)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Heading</td>
+<td>Pick a time that works</td>
+</tr>
+<tr>
+<td>Note</td>
+<td>Times are shown in your time zone.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">4. Confirmation</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>H2</td>
+<td>You're booked.</td>
+</tr>
+<tr>
+<td>Body</td>
+<td>We'll send a short agenda the day before. To share a brief or your current site, reply to the confirmation email.</td>
+</tr>
+<tr>
+<td>Link</td>
+<td>While you wait, see our work</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">5. Other ways to reach us</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Heading</td>
+<td>Prefer email?</td>
+</tr>
+<tr>
+<td>Email</td>
+<td>hello@<mark class="fill">[betwnstudios.com]</mark></td>
+</tr>
+<tr>
+<td>Founders</td>
+<td>Piyush on <mark class="fill">[LinkedIn]</mark> · Swaraj on <mark class="fill">[LinkedIn]</mark></td>
+</tr>
+<tr>
+<td>Office</td>
+<td><mark class="fill">[Address, checked before publishing]</mark></td>
+</tr>
+</tbody>
+</table></div></div>
+</section>
+<section class="page" id="global" aria-labelledby="global-t">
+  <header class="ph">
+    <p class="kind">Page</p>
+    <h1 id="global-t">Nav, footer and SEO</h1>
+    <p class="url"><code>Every page</code> · <span class="fills">6 to fill</span></p>
+  </header>
+  <div class="prose"><h2 class="sec">1. Navigation</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+<th>Links to</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Logo</td>
+<td>Betwn</td>
+<td>/</td>
+</tr>
+<tr>
+<td>Link 1</td>
+<td>Work</td>
+<td>/work</td>
+</tr>
+<tr>
+<td>Link 2</td>
+<td>Services</td>
+<td>/#services</td>
+</tr>
+<tr>
+<td>Link 3</td>
+<td>Process</td>
+<td>/#process</td>
+</tr>
+<tr>
+<td>Link 4</td>
+<td>Pricing</td>
+<td>/pricing</td>
+</tr>
+<tr>
+<td>Link 5</td>
+<td>About</td>
+<td>/#founders</td>
+</tr>
+<tr>
+<td>Button</td>
+<td>Book a call</td>
+<td>/book-a-call</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">2. Buttons used across the site</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Where</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Every primary CTA</td>
+<td>Book a quick call</td>
+</tr>
+<tr>
+<td>Nav button (short)</td>
+<td>Book a call</td>
+</tr>
+<tr>
+<td>Secondary CTA</td>
+<td>See case studies</td>
+</tr>
+<tr>
+<td>Case study cards</td>
+<td>Read case study</td>
+</tr>
+</tbody>
+</table></div>
+<p>Retire "Let's chat?", "Get similar results", "View results", "Reserve a Spot" and "Send Message".</p>
+<h2 class="sec">3. Footer</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Copy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tagline</td>
+<td>Senior design and build, without the agency layers.</td>
+</tr>
+<tr>
+<td>Column: Work</td>
+<td>Case studies · Sourcify AI · Economize · The Market Lens</td>
+</tr>
+<tr>
+<td>Column: Studio</td>
+<td>Services · Process · Pricing · About</td>
+</tr>
+<tr>
+<td>Column: Contact</td>
+<td>Book a call · hello@<mark class="fill">[betwnstudios.com]</mark> · LinkedIn · X</td>
+</tr>
+<tr>
+<td>Column: Legal</td>
+<td>Privacy policy · Terms of service</td>
+</tr>
+<tr>
+<td>Proof</td>
+<td>Official Framer Expert · 5.0 on Clutch (Read reviews)</td>
+</tr>
+<tr>
+<td>Bottom line</td>
+<td>© 2026 Betwn Studios. <mark class="fill">[Mumbai, India]</mark>.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">4. SEO titles and descriptions</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Title (under 60 characters)</th>
+<th>Meta description (under 155 characters)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Home</td>
+<td>Betwn — Senior design and build for growing teams</td>
+<td>Founder-led studio designing and building websites, product UI and brand systems for mid-market teams and repeat founders. Framer Expert.</td>
+</tr>
+<tr>
+<td>Work</td>
+<td>Work — Betwn Studios</td>
+<td>Websites, product UI and brand systems we've designed and shipped for SaaS, AI and fintech teams, with the results behind each one.</td>
+</tr>
+<tr>
+<td>Case study</td>
+<td><mark class="fill">[Client]</mark>: <mark class="fill">[outcome]</mark> — Betwn</td>
+<td>How we helped <mark class="fill">[Client]</mark> <mark class="fill">[outcome]</mark>: the brief, what we designed and built, and what changed after launch.</td>
+</tr>
+<tr>
+<td>Pricing</td>
+<td>Pricing — Betwn Studios</td>
+<td>Fixed prices for websites by page count, monthly product design retainers, and motion, pitch deck and collateral packages.</td>
+</tr>
+<tr>
+<td>Book a call</td>
+<td>Book a quick call — Betwn Studios</td>
+<td>Book a 30-minute call with a Betwn founder. Leave with a rough scope, timeline and price range.</td>
+</tr>
+<tr>
+<td>Privacy</td>
+<td>Privacy policy — Betwn Studios</td>
+<td>How Betwn Studios collects, uses and protects your information.</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">5. Share image and icon</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Asset</th>
+<th>Spec</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OG image</td>
+<td>1200×630, logo plus the H1 "The design partner your in-house team wishes it had."</td>
+</tr>
+<tr>
+<td>Favicon</td>
+<td>Betwn mark, 32px and 180px</td>
+</tr>
+</tbody>
+</table></div>
+<h2 class="sec">6. Bios to update on launch day</h2>
+<p>Use this line on Framer Experts, Clutch, Dribbble, LinkedIn and X: <strong>Founder-led design studio. Websites, product UI and brand systems for mid-market teams and repeat founders.</strong> Remove "Starting at $1K" from the Framer Experts profile.</p></div>
+</section>
+  </main>
+</div>
+<script>
+(function () {
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav a'));
+  var map = {};
+  links.forEach(function (a) { map[a.getAttribute('href').slice(1)] = a; });
+  if (!('IntersectionObserver' in window)) return;
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        links.forEach(function (a) { a.classList.remove('on'); });
+        var a = map[e.target.id]; if (a) a.classList.add('on');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  document.querySelectorAll('section.page').forEach(function (s) { io.observe(s); });
+})();
+</script>
